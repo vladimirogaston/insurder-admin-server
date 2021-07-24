@@ -1,7 +1,6 @@
 package ar.ungs.infraestructure.api.resources;
 
 import ar.ungs.domain.in_ports.InspectionService;
-import ar.ungs.domain.models.inspection.Inspection;
 import ar.ungs.infraestructure.api.dtos.InspectionCreationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

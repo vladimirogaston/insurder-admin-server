@@ -30,33 +30,33 @@ public class ScheduleServiceImpl implements ScheduleService{
     public void cancel(String scheduleId, String inspectionId, Cancellation cancellation) {
         Schedule schedule = readNotNotifiedByInspector(scheduleId);
         schedule.cancel(inspectionId, cancellation);
-        schedulePersistence.update(schedule);
+        schedulePersistence.save(schedule);
     }
 
     @Override
     public void close(String scheduleId, String inspectionId) {
         Schedule schedule = readNotNotifiedByInspector(scheduleId);
         schedule.close(inspectionId);
-        schedulePersistence.update(schedule);
+        schedulePersistence.save(schedule);
     }
 
     @Override
     public void registerComponent(String scheduleId, String inspectionId, Component component) {
         Schedule schedule = readNotNotifiedByInspector(scheduleId);
         schedule.close(inspectionId);
-        schedulePersistence.update(schedule);
+        schedulePersistence.save(schedule);
     }
 
     @Override
     public void notifySchedule(String scheduleId) {
         Schedule schedule = readNotNotifiedByInspector(scheduleId);
         schedule.notifySchedule();
-        schedulePersistence.update(schedule);
+        schedulePersistence.save(schedule);
     }
 
     private void doProcess(Consumer<Schedule> operation, String ...args) {
         Schedule schedule = readNotNotifiedByInspector(args[0]);
         operation.accept(schedule);
-        schedulePersistence.update(schedule);
+        schedulePersistence.save(schedule);
     }
 }

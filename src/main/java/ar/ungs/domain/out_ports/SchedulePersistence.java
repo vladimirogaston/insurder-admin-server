@@ -11,6 +11,4 @@ public interface SchedulePersistence {
     Optional<Schedule> readNotNotifiedByInspector(String inspectorCode);
 
     Optional<Schedule> save(Schedule schedule);
-
-    void update(Schedule schedule);
 }
