@@ -1,7 +1,7 @@
-package ar.ungs.infraestructure.data.daos;
+package ar.ungs.infraestructure.data;
 
-import ar.ungs.infraestructure.data.model.Role;
-import ar.ungs.infraestructure.data.model.User;
+import ar.ungs.infraestructure.data.entities.Role;
+import ar.ungs.infraestructure.data.entities.User;
 import ar.ungs.configuration.services.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;

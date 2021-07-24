@@ -1,7 +1,7 @@
 package ar.ungs.infraestructure.api.resources;
 
 import ar.ungs.configuration.services.UserService;
-import ar.ungs.infraestructure.data.model.Role;
+import ar.ungs.infraestructure.data.entities.Role;
 import ar.ungs.infraestructure.api.dtos.TokenDto;
 import ar.ungs.infraestructure.api.dtos.UserDto;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

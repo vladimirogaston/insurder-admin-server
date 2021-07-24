@@ -1,4 +1,4 @@
-package ar.ungs.infraestructure.data.model;
+package ar.ungs.infraestructure.data.entities;
 
 public enum Role {
     ADMIN, MANAGER, OPERATOR, CUSTOMER, AUTHENTICATED;

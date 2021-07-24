@@ -2,8 +2,8 @@ package ar.ungs.configuration.services;
 
 import ar.ungs.infraestructure.api.http_errors.ConflictException;
 import ar.ungs.infraestructure.api.http_errors.ForbiddenException;
-import ar.ungs.infraestructure.data.model.Role;
-import ar.ungs.infraestructure.data.model.User;
+import ar.ungs.infraestructure.data.entities.Role;
+import ar.ungs.infraestructure.data.entities.User;
 import ar.ungs.domain.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

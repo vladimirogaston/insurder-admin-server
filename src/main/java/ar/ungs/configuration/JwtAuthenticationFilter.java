@@ -1,7 +1,7 @@
 package ar.ungs.configuration;
 
 import ar.ungs.configuration.services.JwtService;
-import ar.ungs.infraestructure.data.model.Role;
+import ar.ungs.infraestructure.data.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

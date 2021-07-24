@@ -1,7 +1,7 @@
 package ar.ungs.configuration.services;
 
-import ar.ungs.infraestructure.data.model.Role;
-import ar.ungs.infraestructure.data.model.User;
+import ar.ungs.infraestructure.data.entities.Role;
+import ar.ungs.infraestructure.data.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

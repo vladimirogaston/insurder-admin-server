@@ -1,7 +1,7 @@
 package ar.ungs.infraestructure.api.dtos;
 
-import ar.ungs.infraestructure.data.model.Role;
-import ar.ungs.infraestructure.data.model.User;
+import ar.ungs.infraestructure.data.entities.Role;
+import ar.ungs.infraestructure.data.entities.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
