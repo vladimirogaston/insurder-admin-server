@@ -4,5 +4,5 @@ import ar.ungs.domain.models.inspection.Inspection;
 
 public interface InspectionService {
 
-    Inspection save(Inspection inspection);
+    void prepare(Inspection inspection);
 }

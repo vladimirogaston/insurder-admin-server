@@ -25,6 +25,6 @@ public class InspectionResource {
 
     @PostMapping
     public void save(@RequestBody @Valid InspectionCreationDto inspectionDto) {
-        this.inspectionService.save(inspectionDto.toModel());
+        this.inspectionService.prepare(inspectionDto.toModel());
     }
 }

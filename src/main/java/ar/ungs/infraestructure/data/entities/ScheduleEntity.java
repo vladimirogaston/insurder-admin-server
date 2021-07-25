@@ -6,10 +6,9 @@ import ar.ungs.domain.models.inspection.Inspection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.persistence.Id;
 import java.util.Map;
 
 @Data
