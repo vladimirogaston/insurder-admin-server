@@ -32,7 +32,7 @@ public class SwaggerConfig {
     // http://localhost:8080/api/v0/swagger-ui.html
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("API Documentation")
-                .description("BETCA. Back-end con Tecnologías de Código Abierto (SPRING).")
+                .description("Insurance Carrier Management API.")
                 .build();
     }
 
