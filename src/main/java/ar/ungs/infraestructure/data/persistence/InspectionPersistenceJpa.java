@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class InspectionPersistenceMongodb implements InspectionPersistence {
+public class InspectionPersistenceJpa implements InspectionPersistence {
 
     private InspectionDao inspectionDao;
 
     @Autowired
-    public InspectionPersistenceMongodb(InspectionDao inspectionDao) {
+    public InspectionPersistenceJpa(InspectionDao inspectionDao) {
         this.inspectionDao = inspectionDao;
     }
 

@@ -13,28 +13,24 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class SchedulePersistenceMongodb implements SchedulePersistence {
+public class SchedulePersistenceJpa implements SchedulePersistence {
 
     private ScheduleDao scheduleDao;
 
     @Autowired
-    public SchedulePersistenceMongodb(ScheduleDao scheduleDao) {
+    public SchedulePersistenceJpa(ScheduleDao scheduleDao) {
         this.scheduleDao = scheduleDao;
     }
 
-    /**
-     * @implNote change this, let scheduleDao do the work for you
-     * @param inspectorCode
-     * @return
-     */
     @Override
     public Optional<Schedule> readNotNotifiedByInspector(String inspectorCode) {
-        List<Schedule> scheduleList = scheduleDao.findAll()
+        /*List<Schedule> scheduleList = scheduleDao.findAll()
                 .stream()
                 .filter(scheduleEntity -> scheduleEntity.getInspector().getId().equals(inspectorCode))
         .map(ScheduleEntity::toModel).collect(Collectors.toList());
         if (scheduleList.size() > 1) throw new DomainConstraintViolationException();
-        Schedule schedule = scheduleList.get(0);
+        */
+        Schedule schedule = null; //scheduleList.get(0);
         return Optional.ofNullable(schedule);
     }
 

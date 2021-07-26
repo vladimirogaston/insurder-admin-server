@@ -6,12 +6,14 @@ import ar.ungs.domain.models.shared.State;
 import ar.ungs.domain.models.shared.Vehicle;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 @Data
+@ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Inspection {
 

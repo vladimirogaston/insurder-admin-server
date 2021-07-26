@@ -11,8 +11,6 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class Component {
 
-    public enum Condition { BAD, REGULAR, GOOD, UNREDEABLE };
-
     @NotNull
     private Condition condition;
 

@@ -1,26 +1,28 @@
 package ar.ungs.infraestructure.data.entities;
 
-import ar.ungs.domain.models.Inspector;
 import ar.ungs.domain.models.Schedule;
-import ar.ungs.domain.models.inspection.Inspection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.Map;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Document
+@Entity
 public class ScheduleEntity {
+
     @Id
-    private String id;
-    @DBRef
-    private Map<String, Inspection> inspections;
-    @DBRef
-    private Inspector inspector;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @OneToMany
+    private List<InspectionEntity> inspections;
+
+    @ManyToOne
+    private InspectorEntity inspector;
+
     private boolean notified;
 
     public ScheduleEntity(Schedule schedule) {

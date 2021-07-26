@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping
+@RequestMapping(value = InspectionResource.INSPECTIONS)
 public class InspectionResource {
 
-    private static final String INSPECTIONS = "/inspections";
+    public static final String INSPECTIONS = "/inspections";
 
     private InspectionService inspectionService;
 

@@ -18,6 +18,8 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    public static final String RESOURCES = "ar.ungs.infraestructure.api.resources";
+
     @Bean
     public Docket api() {
         /*
@@ -34,7 +36,7 @@ public class SwaggerConfig {
                 .apiInfo(this.apiInfo())
                 .select()
                 .paths(PathSelectors.any())
-                .apis(RequestHandlerSelectors.basePackage("ar.ungs.infraestructure.api"))
+                .apis(RequestHandlerSelectors.basePackage(RESOURCES))
                 .build()
                 .securityContexts(this.securityContext());
     }

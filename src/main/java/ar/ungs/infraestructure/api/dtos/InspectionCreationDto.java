@@ -20,7 +20,6 @@ public class InspectionCreationDto {
     private Vehicle vehicle;
 
     @NotNull
-    @FutureOrPresent
     private Date preparationDate;
 
     public Inspection toModel() {
