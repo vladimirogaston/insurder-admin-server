@@ -17,8 +17,10 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+
     @Bean
     public Docket api() {
+        /*
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
@@ -26,6 +28,14 @@ public class SwaggerConfig {
                 .build()
                 .apiInfo(apiInfo())
                 .securitySchemes(this.schemeList())
+                .securityContexts(this.securityContext());
+                */
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(this.apiInfo())
+                .select()
+                .paths(PathSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("ar.ungs.infraestructure.api"))
+                .build()
                 .securityContexts(this.securityContext());
     }
 
