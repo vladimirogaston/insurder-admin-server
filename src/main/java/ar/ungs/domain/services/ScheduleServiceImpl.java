@@ -22,41 +22,35 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public Schedule readNotNotifiedByInspector(String inspectorCode) {
+    public Schedule readNotNotifiedByInspector(int inspectorCode) {
         return schedulePersistence.readNotNotifiedByInspector(inspectorCode).orElseThrow(()->new NotFoundException(""));
     }
 
     @Override
-    public void cancel(String scheduleId, String inspectionId, Cancellation cancellation) {
+    public void cancel(int scheduleId, int inspectionId, Cancellation cancellation) {
         Schedule schedule = readNotNotifiedByInspector(scheduleId);
         schedule.cancel(inspectionId, cancellation);
         schedulePersistence.save(schedule);
     }
 
     @Override
-    public void close(String scheduleId, String inspectionId) {
+    public void close(int scheduleId, int inspectionId) {
         Schedule schedule = readNotNotifiedByInspector(scheduleId);
         schedule.close(inspectionId);
         schedulePersistence.save(schedule);
     }
 
     @Override
-    public void registerComponent(String scheduleId, String inspectionId, Component component) {
+    public void registerComponent(int scheduleId, int inspectionId, Component component) {
         Schedule schedule = readNotNotifiedByInspector(scheduleId);
         schedule.close(inspectionId);
         schedulePersistence.save(schedule);
     }
 
     @Override
-    public void notifySchedule(String scheduleId) {
+    public void notifySchedule(int scheduleId) {
         Schedule schedule = readNotNotifiedByInspector(scheduleId);
         schedule.notifySchedule();
-        schedulePersistence.save(schedule);
-    }
-
-    private void doProcess(Consumer<Schedule> operation, String ...args) {
-        Schedule schedule = readNotNotifiedByInspector(args[0]);
-        operation.accept(schedule);
         schedulePersistence.save(schedule);
     }
 }

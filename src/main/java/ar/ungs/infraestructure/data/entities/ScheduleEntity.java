@@ -2,6 +2,7 @@ package ar.ungs.infraestructure.data.entities;
 
 import ar.ungs.domain.models.Schedule;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
@@ -10,18 +11,13 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 public class ScheduleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    @OneToMany
-    private List<InspectionEntity> inspections;
-
-    @ManyToOne
-    private InspectorEntity inspector;
 
     private boolean notified;
 

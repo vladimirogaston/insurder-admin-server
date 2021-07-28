@@ -23,7 +23,7 @@ public class SchedulePersistenceJpa implements SchedulePersistence {
     }
 
     @Override
-    public Optional<Schedule> readNotNotifiedByInspector(String inspectorCode) {
+    public Optional<Schedule> readNotNotifiedByInspector(int inspectorCode) {
         /*List<Schedule> scheduleList = scheduleDao.findAll()
                 .stream()
                 .filter(scheduleEntity -> scheduleEntity.getInspector().getId().equals(inspectorCode))

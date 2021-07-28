@@ -27,13 +27,13 @@ public class ScheduleResource {
     }
 
     @GetMapping(value = ID)
-    Schedule readOpenScheduleByInspectorCode(@PathVariable String inspectorCode) {
+    Schedule readOpenScheduleByInspectorCode(@PathVariable int inspectorCode) {
         return scheduleService.readNotNotifiedByInspector(inspectorCode);
     }
 
     @PutMapping(value = ID + INSPECTIONS + ID)
-    public void registerComponent(@PathVariable String scheduleId,
-                                  @PathVariable String inspectionId,
+    public void registerComponent(@PathVariable int scheduleId,
+                                  @PathVariable int inspectionId,
                                   @RequestBody @Valid Component component) {
         scheduleService.registerComponent(scheduleId, inspectionId, component);
     }
@@ -45,19 +45,19 @@ public class ScheduleResource {
      * @body cancellation
      */
     @PatchMapping(value = ID + INSPECTIONS + ID)
-    public void cancel(@PathVariable String scheduleId,
-                       @PathVariable String inspectionId,
+    public void cancel(@PathVariable int scheduleId,
+                       @PathVariable int inspectionId,
                        @RequestBody @Valid Cancellation cancellation) {
         scheduleService.cancel(scheduleId, inspectionId, cancellation);
     }
 
     @PatchMapping(value = ID + INSPECTIONS)
-    public void close(@PathVariable String scheduleId, @RequestParam String inspectionId) {
+    public void close(@PathVariable int scheduleId, @RequestParam int inspectionId) {
         scheduleService.close(scheduleId, inspectionId);
     }
 
     @PatchMapping(value = ID)
-    public void notifySchedule(@PathVariable String scheduleId){
+    public void notifySchedule(@PathVariable int scheduleId){
         scheduleService.notifySchedule(scheduleId);
     }
 }

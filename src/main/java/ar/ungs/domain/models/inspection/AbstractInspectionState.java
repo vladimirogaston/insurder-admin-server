@@ -12,7 +12,7 @@ public abstract class AbstractInspectionState {
 
     public abstract void prepare(Inspection inspection, Vehicle vehicle);
 
-    public abstract void plan(Inspection inspection, String scheduleCode);
+    public abstract void plan(Inspection inspection, int scheduleCode);
 
     public abstract void register(Inspection inspection, Component component);
 

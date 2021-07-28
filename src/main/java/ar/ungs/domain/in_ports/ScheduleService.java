@@ -6,13 +6,13 @@ import ar.ungs.domain.models.shared.Component;
 
 public interface ScheduleService {
 
-    Schedule readNotNotifiedByInspector(String inspectorCode);
+    Schedule readNotNotifiedByInspector(int inspectorCode);
 
-    void cancel(String scheduleId, String inspectionId, Cancellation cancellation);
+    void cancel(int scheduleId, int inspectionId, Cancellation cancellation);
 
-    void close(String scheduleId, String inspectionId);
+    void close(int scheduleId, int inspectionId);
 
-    void notifySchedule(String scheduleId);
+    void notifySchedule(int scheduleId);
 
-    void registerComponent(String scheduleId, String inspectionId, Component component);
+    void registerComponent(int scheduleId, int inspectionId, Component component);
 }

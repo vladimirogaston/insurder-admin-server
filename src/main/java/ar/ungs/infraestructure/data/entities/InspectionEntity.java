@@ -3,6 +3,7 @@ package ar.ungs.infraestructure.data.entities;
 import ar.ungs.domain.models.inspection.Inspection;
 import ar.ungs.domain.models.shared.State;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
@@ -12,21 +13,13 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 public class InspectionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    @Embedded
-    private VehicleEntity vehicle;
-
-    @OneToMany
-    private List<ComponentEntity> components;
-
-    @Embedded
-    private CancellationEntity cancellation;
 
     private Date preparationDate;
 

@@ -16,6 +16,7 @@ import java.util.List;
 
 class ScheduleTest {
 
+    public static final int ID = 123;
     List<Inspection> inspections;
     List<Inspector> inspectors;
     final int AVAILABLE = 0;
@@ -30,12 +31,12 @@ class ScheduleTest {
                 .brand("xl3")
                 .build();
         inspectors = new ArrayList<>();
-        inspectors.add(Inspector.builder().available(true).id("123L").build());
-        inspectors.add(Inspector.builder().available(false).id("1223L").build());
+        inspectors.add(Inspector.builder().available(true).id(ID).build());
+        inspectors.add(Inspector.builder().available(false).id(ID).build());
         inspections = new ArrayList<>();
         for(int count = 0; count < 10; count++) {
             Inspection inspection = new Inspection();
-            inspection.setId(count + "");
+            inspection.setId(count);
             inspection.prepare(Vehicle.builder().build());
             inspections.add(inspection);
         }
@@ -58,10 +59,10 @@ class ScheduleTest {
         });
         Inspector inspector = inspectors.get(AVAILABLE);
         Schedule schedule = new Schedule(inspector);
-        schedule.setId("123L");
+        schedule.setId(ID);
         Assertions.assertNotNull(schedule.getInspector());
         Assertions.assertNotNull(schedule.getInspections());
-        Assertions.assertEquals("123L", schedule.getId());
+        Assertions.assertEquals(ID, schedule.getId());
     }
 
     @Test
@@ -79,17 +80,17 @@ class ScheduleTest {
     void register() {
         Schedule schedule = makeSchedule();
         Assertions.assertThrows(NotFoundException.class, ()->{
-            schedule.register("20L", component);
+            schedule.register(12, component);
         });
-        schedule.register("1", component);
-        Assertions.assertEquals(schedule.findById("1").getComponents().size(), 1);
+        schedule.register(1, component);
+        Assertions.assertEquals(schedule.findById(1).getComponents().size(), 1);
     }
 
     @Test
     void cancel() {
         Schedule schedule = makeSchedule();
         for(int id = 0; id < Schedule.MAX; id++) {
-            schedule.cancel(id+"", Cancellation.builder().build());
+            schedule.cancel(id, Cancellation.builder().build());
         }
         Assertions.assertTrue(schedule.canNotify());
         schedule.notifySchedule();
