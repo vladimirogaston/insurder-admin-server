@@ -10,9 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -74,5 +72,9 @@ public class Schedule {
         Inspection inspection = getInspections().get(id);
         if(inspection == null) throw new NotFoundException("");
         return inspection;
+    }
+
+    public static Set<Schedule> makeScheduleSet(Queue<Inspector> inspectors, Queue<Inspection> inspections) {
+        return null;
     }
 }
