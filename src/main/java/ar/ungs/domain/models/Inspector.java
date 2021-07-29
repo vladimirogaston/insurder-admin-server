@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class Inspector {
 
-    private String id;
+    private int id;
     private boolean available;
 }

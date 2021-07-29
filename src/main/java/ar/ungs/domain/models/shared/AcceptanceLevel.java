@@ -1,5 +1,5 @@
 package ar.ungs.domain.models.shared;
 
-public enum Condition {
+public enum AcceptanceLevel {
     BAD, REGULAR, GOOD, UNREDEABLE
 }

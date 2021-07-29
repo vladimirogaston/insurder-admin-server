@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class Component {
 
     @NotNull
-    private Condition condition;
+    private AcceptanceLevel condition;
 
     @NotBlank
     private String brand;

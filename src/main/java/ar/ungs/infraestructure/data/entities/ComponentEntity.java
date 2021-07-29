@@ -1,27 +1,26 @@
 package ar.ungs.infraestructure.data.entities;
 
-import ar.ungs.domain.models.shared.Condition;
+import ar.ungs.domain.models.shared.AcceptanceLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 public class ComponentEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Enumerated
-    private Condition condition;
 
     private String brand;
 
-    private String code;
+    private String serial;
+
+    @Enumerated(EnumType.STRING)
+    private AcceptanceLevel acceptanceLevel;
 }

@@ -20,8 +20,8 @@ public class Schedule {
 
     @JsonIgnore
     public static int MAX = 6;
-    private String id;
-    private Map<String, Inspection> inspections;
+    private int id;
+    private Map<Integer, Inspection> inspections;
     private Inspector inspector;
     private boolean notified;
 
@@ -39,17 +39,17 @@ public class Schedule {
         getInspections().put(inspection.getId(), inspection);
     }
 
-    public void register(String id, Component component) {
+    public void register(int id, Component component) {
         Inspection inspection = findById(id);
         inspection.register(component);
     }
 
-    public void close(String id) {
+    public void close(int id) {
         Inspection inspection = findById(id);
         inspection.close();
     }
 
-    public void cancel(String id, Cancellation cancellation) {
+    public void cancel(int id, Cancellation cancellation) {
         Inspection inspection = findById(id);
         inspection.close(cancellation);
     }
@@ -70,7 +70,7 @@ public class Schedule {
         setNotified(true);
     }
 
-    public Inspection findById(String id) {
+    public Inspection findById(int id) {
         Inspection inspection = getInspections().get(id);
         if(inspection == null) throw new NotFoundException("");
         return inspection;

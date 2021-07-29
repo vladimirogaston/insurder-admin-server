@@ -15,7 +15,7 @@ public class Planned extends AbstractInspectionState {
     }
 
     @Override
-    public void plan(Inspection inspection, String scheduleCode) {
+    public void plan(Inspection inspection, int scheduleCode) {
         inspection.setScheduleCode(scheduleCode);
         inspection.setPlaningDate(new Date());
         inspection.doTransition(State.REGISTER);
