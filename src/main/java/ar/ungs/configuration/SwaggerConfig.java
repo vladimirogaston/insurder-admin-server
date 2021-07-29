@@ -18,7 +18,7 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    public static final String RESOURCES = "ar.ungs.infraestructure.api.resources";
+    public static final String RESOURCES = "ar.ungs.infrastructure.api.resources";
 
     @Bean
     public Docket api() {
