@@ -21,6 +21,9 @@ public class InspectionEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ComponentEntity> components;
+
     private Date preparationDate;
 
     private Date planingDate;
@@ -28,6 +31,12 @@ public class InspectionEntity {
     private String scheduleCode;
 
     private Date closingDate;
+
+    @Embedded
+    private CancellationEntity cancellation;
+
+    @Embedded
+    private VehicleEntity vehicle;
 
     @Enumerated(value = EnumType.STRING)
     private State currentState;

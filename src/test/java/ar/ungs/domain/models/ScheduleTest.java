@@ -5,7 +5,7 @@ import ar.ungs.domain.exceptions.NotFoundException;
 import ar.ungs.domain.models.inspection.Inspection;
 import ar.ungs.domain.models.shared.Cancellation;
 import ar.ungs.domain.models.shared.Component;
-import ar.ungs.domain.models.shared.Condition;
+import ar.ungs.domain.models.shared.AcceptanceLevel;
 import ar.ungs.domain.models.shared.Vehicle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ class ScheduleTest {
     void setUp(){
         component = Component.builder()
                 .code("23L")
-                .condition(Condition.BAD)
+                .condition(AcceptanceLevel.BAD)
                 .brand("xl3")
                 .build();
         inspectors = new ArrayList<>();

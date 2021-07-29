@@ -19,6 +19,13 @@ public class ScheduleEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InspectionEntity> inspections;
+
+    @ManyToOne
+    @JoinColumn
+    private InspectorEntity inspector;
+
     private boolean notified;
 
     public ScheduleEntity(Schedule schedule) {
