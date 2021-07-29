@@ -12,23 +12,22 @@ import java.util.Set;
 @Component
 public class DefaultSchedullerStrategy implements SchedullerStrategy {
 
-    /**
-     * TERMINAR ESTE CODIGO PORQUE MAGA NO ME DEJA TERMINARLO!
-     * @param inspectors
-     * @param inspections
-     * @return
-     */
     @Override
-    public Set<Schedule> makeScheduleSet(Queue<Inspector> inspectors, Queue<Inspection> inspections) {
+    public Set<Schedule> distributeWorkOverAvailableInspectors(Queue<Inspector> inspectors, Queue<Inspection> inspections) {
         if(inspectors.isEmpty() || inspections.isEmpty()) throw new UnsupportedOperationException();
         Set<Schedule> schedules = new HashSet<>();
         do {
             Inspector inspector = inspectors.poll();
             int count = 0;
-            while(count < Schedule.MAX) {
-
+            Schedule schedule = new Schedule();
+            while(count < Schedule.MAX && !inspections.isEmpty()) {
+                Inspection inspection = inspections.poll();
+                schedule.plan(inspection);
             }
-        }while (inspectors.isEmpty() || inspections.isEmpty());
-        return null;
+            if (schedule.hasInspections()) {
+                schedules.add(schedule);
+            }
+        } while (inspectors.isEmpty() || inspections.isEmpty());
+        return schedules;
     }
 }

@@ -2,7 +2,9 @@ package ar.ungs.infrastructure.data.persistence;
 
 import org.junit.jupiter.api.Test;
 
-class InspectionPersistenceMongodbTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class InspectionPersistenceJpaTest {
 
     @Test
     void save() {

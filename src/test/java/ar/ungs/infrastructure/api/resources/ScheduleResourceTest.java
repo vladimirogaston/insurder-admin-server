@@ -23,4 +23,24 @@ class ScheduleResourceTest {
     @Test
     void notifySchedule() {
     }
+
+    @Test
+    void testReadOpenScheduleByInspectorCode() {
+    }
+
+    @Test
+    void testRegisterComponent() {
+    }
+
+    @Test
+    void testCancel() {
+    }
+
+    @Test
+    void testClose() {
+    }
+
+    @Test
+    void testNotifySchedule() {
+    }
 }

@@ -7,5 +7,5 @@ import java.util.Set;
 
 public interface SchedullerStrategy {
 
-    Set<Schedule> makeScheduleSet(Queue<Inspector> inspectors, Queue<Inspection> inspections);
+    Set<Schedule> distributeWorkOverAvailableInspectors(Queue<Inspector> inspectors, Queue<Inspection> inspections);
 }

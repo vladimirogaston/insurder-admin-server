@@ -9,6 +9,7 @@ import ar.ungs.domain.models.shared.State;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
@@ -22,6 +23,9 @@ public class Schedule {
     private Map<Integer, Inspection> inspections;
     private Inspector inspector;
     private boolean notified;
+
+    @Autowired
+    private static SchedullerStrategy schedullerStrategy;
 
     public Schedule(Inspector inspector) {
         if(!inspector.isAvailable()) throw new DomainConstraintViolationException();
@@ -75,6 +79,10 @@ public class Schedule {
     }
 
     public static Set<Schedule> makeScheduleSet(Queue<Inspector> inspectors, Queue<Inspection> inspections) {
-        return null;
+        return schedullerStrategy.distributeWorkOverAvailableInspectors(inspectors, inspections);
+    }
+
+    public boolean hasInspections() {
+        return !this.inspections.isEmpty();
     }
 }
