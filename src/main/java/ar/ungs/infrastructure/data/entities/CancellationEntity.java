@@ -2,6 +2,7 @@ package ar.ungs.infrastructure.data.entities;
 
 import ar.ungs.domain.models.shared.Cancellation;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode
 @Embeddable
 public class CancellationEntity {
 

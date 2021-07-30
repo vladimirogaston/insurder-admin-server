@@ -21,7 +21,7 @@ public class ComponentEntity {
 
     private String brand;
 
-    private String serial;
+    private String code;
 
     @Enumerated(EnumType.STRING)
     private AcceptanceLevel acceptanceLevel;

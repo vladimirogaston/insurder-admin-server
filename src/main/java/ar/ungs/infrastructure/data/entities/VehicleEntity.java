@@ -2,6 +2,7 @@ package ar.ungs.infrastructure.data.entities;
 
 import ar.ungs.domain.models.shared.Vehicle;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
@@ -9,6 +10,7 @@ import javax.persistence.Embeddable;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode
 @Embeddable
 public class VehicleEntity {
 

@@ -1,6 +1,7 @@
 package ar.ungs.infrastructure.data.entities;
 
 import ar.ungs.domain.models.inspection.Inspection;
+import ar.ungs.domain.models.shared.Component;
 import ar.ungs.domain.models.shared.State;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -43,11 +45,24 @@ public class InspectionEntity {
 
     public InspectionEntity(Inspection inspection) {
         BeanUtils.copyProperties(inspection, this);
+        this.vehicle = new VehicleEntity(inspection.getVehicle());
+        this.cancellation = new CancellationEntity(inspection.getCancellation());
+        this.components = new LinkedList<>();
+        inspection.getComponents().forEach(c->{
+            components.add(new ComponentEntity(c));
+        });
     }
 
     public Inspection toModel() {
         Inspection inspection = new Inspection();
         BeanUtils.copyProperties(this, inspection);
+        LinkedList<Component> components = new LinkedList<>();
+        getComponents().forEach(componentEntity -> {
+            components.add(componentEntity.toModel());
+        });
+        inspection.setComponents(components);
+        if(vehicle != null) inspection.setVehicle(vehicle.toModel());
+        if(cancellation != null) inspection.setCancellation(cancellation.toModel());
         return inspection;
     }
 }
