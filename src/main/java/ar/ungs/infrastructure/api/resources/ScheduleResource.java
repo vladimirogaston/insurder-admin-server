@@ -38,12 +38,6 @@ public class ScheduleResource {
         scheduleService.registerComponent(scheduleId, inspectionId, component);
     }
 
-    /**
-     * @path: /schedules/{id}/inspections/{id}
-     * @variable scheduleId
-     * @variable inspectionId
-     * @body cancellation
-     */
     @PatchMapping(value = ID + INSPECTIONS + ID)
     public void cancel(@PathVariable int scheduleId,
                        @PathVariable int inspectionId,

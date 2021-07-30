@@ -27,7 +27,7 @@ class ScheduleTest {
     void setUp(){
         component = Component.builder()
                 .code("23L")
-                .condition(AcceptanceLevel.BAD)
+                .acceptanceLevel(AcceptanceLevel.BAD)
                 .brand("xl3")
                 .build();
         inspectors = new ArrayList<>();

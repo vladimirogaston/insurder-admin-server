@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Data
 @Builder
+@EqualsAndHashCode
 public class Cancellation {
 
     @NotNull

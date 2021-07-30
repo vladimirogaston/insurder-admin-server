@@ -2,7 +2,9 @@ package ar.ungs.infrastructure.data.persistence;
 
 import org.junit.jupiter.api.Test;
 
-class SchedulePersistenceMongodbTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class SchedulePersistenceJpaTest {
 
     @Test
     void readNotNotifiedByInspector() {
