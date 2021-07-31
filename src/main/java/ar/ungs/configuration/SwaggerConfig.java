@@ -38,7 +38,8 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .apis(RequestHandlerSelectors.basePackage(RESOURCES))
                 .build()
-                .securityContexts(this.securityContext());
+                ;
+                //.securityContexts(this.securityContext());
     }
 
     // http://localhost:8080/api/v0/swagger-ui.html
