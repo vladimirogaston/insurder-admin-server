@@ -33,7 +33,7 @@ public class ScheduleEntity {
     private boolean notified;
 
     public ScheduleEntity(Schedule schedule) {
-        setInspector(new InspectorEntity(schedule.getInspector()));
+        if(schedule.getInspector() != null) setInspector(new InspectorEntity(schedule.getInspector()));
         inspections = new LinkedList<>();
         schedule.getInspections().forEach((k,v)->{
             inspections.add(new InspectionEntity(v));
@@ -45,7 +45,7 @@ public class ScheduleEntity {
     public Schedule toModel() {
         Schedule schedule = new Schedule();
         BeanUtils.copyProperties(this, schedule);
-        schedule.setInspector(inspector.toModel());
+        if(getInspector() != null) schedule.setInspector(inspector.toModel());
         Map<Integer, Inspection> inspectionMap = new HashMap<>();
         inspections.forEach(inspectionEntity -> {
             inspectionMap.put(inspectionEntity.getId(), inspectionEntity.toModel());

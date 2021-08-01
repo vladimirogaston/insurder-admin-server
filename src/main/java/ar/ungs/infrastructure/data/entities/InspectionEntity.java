@@ -20,10 +20,10 @@ import java.util.List;
 public class InspectionEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<ComponentEntity> components;
 
     private Date preparationDate;
@@ -34,9 +34,11 @@ public class InspectionEntity {
 
     private Date closingDate;
 
+    @Basic(optional = true)
     @Embedded
     private CancellationEntity cancellation;
 
+    @Basic(optional = false)
     @Embedded
     private VehicleEntity vehicle;
 
@@ -45,8 +47,8 @@ public class InspectionEntity {
 
     public InspectionEntity(Inspection inspection) {
         BeanUtils.copyProperties(inspection, this);
-        this.vehicle = new VehicleEntity(inspection.getVehicle());
-        this.cancellation = new CancellationEntity(inspection.getCancellation());
+        if(inspection.getVehicle() != null) setVehicle(new VehicleEntity(inspection.getVehicle()));
+        if(inspection.getCancellation() != null) setCancellation(new CancellationEntity(inspection.getCancellation()));
         this.components = new LinkedList<>();
         inspection.getComponents().forEach(c->{
             components.add(new ComponentEntity(c));

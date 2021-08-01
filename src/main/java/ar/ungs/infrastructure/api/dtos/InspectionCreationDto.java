@@ -23,7 +23,9 @@ public class InspectionCreationDto {
 
     public Inspection toModel() {
         Inspection inspection = new Inspection();
-        BeanUtils.copyProperties(this, inspection);
+        Vehicle vehicle = Vehicle.builder().build();
+        BeanUtils.copyProperties(getVehicle(), vehicle);
+        inspection.prepare(vehicle);
         return inspection;
     }
 }
