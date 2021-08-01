@@ -25,8 +25,7 @@ public class InspectionCreationDto {
         Inspection inspection = new Inspection();
         Vehicle vehicle = Vehicle.builder().build();
         BeanUtils.copyProperties(getVehicle(), vehicle);
-        inspection.setVehicle(vehicle);
-        inspection.setPreparationDate(preparationDate);
+        inspection.prepare(vehicle);
         return inspection;
     }
 }

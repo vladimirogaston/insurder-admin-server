@@ -26,28 +26,28 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     @Override
     public void cancel(int scheduleId, int inspectionId, Cancellation cancellation) {
-        Schedule schedule = readNotNotifiedByInspector(scheduleId);
+        Schedule schedule = schedulePersistence.findById(scheduleId).orElseThrow(()->new NotFoundException(""));
         schedule.cancel(inspectionId, cancellation);
         schedulePersistence.save(schedule);
     }
 
     @Override
     public void close(int scheduleId, int inspectionId) {
-        Schedule schedule = readNotNotifiedByInspector(scheduleId);
+        Schedule schedule = schedulePersistence.findById(scheduleId).orElseThrow(()->new NotFoundException(""));
         schedule.close(inspectionId);
         schedulePersistence.save(schedule);
     }
 
     @Override
     public void registerComponent(int scheduleId, int inspectionId, Component component) {
-        Schedule schedule = readNotNotifiedByInspector(scheduleId);
-        schedule.close(inspectionId);
+        Schedule schedule = schedulePersistence.findById(scheduleId).orElseThrow(()->new NotFoundException(""));
+        schedule.register(inspectionId, component);
         schedulePersistence.save(schedule);
     }
 
     @Override
     public void notifySchedule(int scheduleId) {
-        Schedule schedule = readNotNotifiedByInspector(scheduleId);
+        Schedule schedule = schedulePersistence.findById(scheduleId).orElseThrow(()->new NotFoundException(""));
         schedule.notifySchedule();
         schedulePersistence.save(schedule);
     }

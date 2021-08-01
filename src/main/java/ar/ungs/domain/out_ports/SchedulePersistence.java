@@ -9,4 +9,6 @@ public interface SchedulePersistence {
     Optional<Schedule> readNotNotifiedByInspector(int inspectorCode);
 
     Optional<Schedule> save(Schedule schedule);
+
+    Optional<Schedule> findById(int scheduleId);
 }
