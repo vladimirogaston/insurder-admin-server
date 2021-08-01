@@ -18,6 +18,7 @@ public class InspectionServiceImpl implements InspectionService {
 
     @Override
     public void prepare(Inspection inspection) {
+        if(inspection == null) throw new IllegalArgumentException("can't save inspection: is null.");
         this.inspectionPersistence.save(inspection);
     }
 }

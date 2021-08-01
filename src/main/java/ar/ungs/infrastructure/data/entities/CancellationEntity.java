@@ -10,7 +10,6 @@ import javax.persistence.Embeddable;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode
 @Embeddable
 public class CancellationEntity {
@@ -18,6 +17,11 @@ public class CancellationEntity {
     private Date registration;
 
     private String description;
+
+    public CancellationEntity() {
+        setDescription("");
+        setRegistration(new Date());
+    }
 
     public CancellationEntity(Cancellation cancellation) {
         BeanUtils.copyProperties(cancellation,this);

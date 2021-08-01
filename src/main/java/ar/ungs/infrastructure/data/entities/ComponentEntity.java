@@ -10,7 +10,6 @@ import org.springframework.beans.BeanUtils;
 import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode
 @Entity
 public class ComponentEntity {
@@ -25,6 +24,13 @@ public class ComponentEntity {
 
     @Enumerated(EnumType.STRING)
     private AcceptanceLevel acceptanceLevel;
+
+    public ComponentEntity() {
+        setId(-1);
+        setBrand("");
+        setCode("");
+        setAcceptanceLevel(AcceptanceLevel.BAD);
+    }
 
     public ComponentEntity(Component component) {
         BeanUtils.copyProperties(component,this);

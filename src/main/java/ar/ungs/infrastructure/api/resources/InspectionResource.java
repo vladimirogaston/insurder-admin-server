@@ -1,6 +1,7 @@
 package ar.ungs.infrastructure.api.resources;
 
 import ar.ungs.domain.in_ports.InspectionService;
+import ar.ungs.domain.models.inspection.Inspection;
 import ar.ungs.infrastructure.api.dtos.InspectionCreationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ public class InspectionResource {
 
     @PostMapping
     public void save(@RequestBody @Valid InspectionCreationDto inspectionDto) {
-        this.inspectionService.prepare(inspectionDto.toModel());
+        Inspection inspection = inspectionDto.toModel();
+        this.inspectionService.prepare(inspection);
     }
 }
