@@ -12,7 +12,7 @@ public class Closed extends AbstractInspectionState {
     }
 
     @Override
-    public void plan(Inspection inspection, String scheduleCode) {
+    public void plan(Inspection inspection, int scheduleCode) {
         throw new UnsupportedOperationException();
     }
 

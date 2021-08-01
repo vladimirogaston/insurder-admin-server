@@ -9,8 +9,6 @@ import ar.ungs.domain.out_ports.SchedulePersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.function.Consumer;
-
 @Service
 public class ScheduleServiceImpl implements ScheduleService{
 
@@ -22,41 +20,35 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public Schedule readNotNotifiedByInspector(String inspectorCode) {
+    public Schedule readNotNotifiedByInspector(int inspectorCode) {
         return schedulePersistence.readNotNotifiedByInspector(inspectorCode).orElseThrow(()->new NotFoundException(""));
     }
 
     @Override
-    public void cancel(String scheduleId, String inspectionId, Cancellation cancellation) {
-        Schedule schedule = readNotNotifiedByInspector(scheduleId);
+    public void cancel(int scheduleId, int inspectionId, Cancellation cancellation) {
+        Schedule schedule = schedulePersistence.findById(scheduleId).orElseThrow(()->new NotFoundException(""));
         schedule.cancel(inspectionId, cancellation);
         schedulePersistence.save(schedule);
     }
 
     @Override
-    public void close(String scheduleId, String inspectionId) {
-        Schedule schedule = readNotNotifiedByInspector(scheduleId);
+    public void close(int scheduleId, int inspectionId) {
+        Schedule schedule = schedulePersistence.findById(scheduleId).orElseThrow(()->new NotFoundException(""));
         schedule.close(inspectionId);
         schedulePersistence.save(schedule);
     }
 
     @Override
-    public void registerComponent(String scheduleId, String inspectionId, Component component) {
-        Schedule schedule = readNotNotifiedByInspector(scheduleId);
-        schedule.close(inspectionId);
+    public void registerComponent(int scheduleId, int inspectionId, Component component) {
+        Schedule schedule = schedulePersistence.findById(scheduleId).orElseThrow(()->new NotFoundException(""));
+        schedule.register(inspectionId, component);
         schedulePersistence.save(schedule);
     }
 
     @Override
-    public void notifySchedule(String scheduleId) {
-        Schedule schedule = readNotNotifiedByInspector(scheduleId);
+    public void notifySchedule(int scheduleId) {
+        Schedule schedule = schedulePersistence.findById(scheduleId).orElseThrow(()->new NotFoundException(""));
         schedule.notifySchedule();
-        schedulePersistence.save(schedule);
-    }
-
-    private void doProcess(Consumer<Schedule> operation, String ...args) {
-        Schedule schedule = readNotNotifiedByInspector(args[0]);
-        operation.accept(schedule);
         schedulePersistence.save(schedule);
     }
 }

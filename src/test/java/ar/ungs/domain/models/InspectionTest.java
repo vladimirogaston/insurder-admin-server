@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class InspectionTest {
 
+    public static final int SCHEDULE_CODE = 3123;
     Inspection inspection;
     Component component;
 
@@ -45,9 +46,9 @@ class InspectionTest {
     void plan() {
         Vehicle vehicle = Vehicle.builder().build();
         inspection.prepare(vehicle);
-        inspection.plan("3123L");
+        inspection.plan(SCHEDULE_CODE);
         Assertions.assertThrows(UnsupportedOperationException.class, ()->{
-            inspection.plan("3123L");
+            inspection.plan(SCHEDULE_CODE);
         });
         Assertions.assertEquals(inspection.getCurrentState(), State.REGISTER);
     }
@@ -56,7 +57,7 @@ class InspectionTest {
     void register() {
         Vehicle vehicle = Vehicle.builder().build();
         inspection.prepare(vehicle);
-        inspection.plan("3123L");
+        inspection.plan(SCHEDULE_CODE);
         inspection.register(component);
         Assertions.assertEquals(inspection.getCurrentState(), State.REGISTER);
     }
@@ -65,7 +66,7 @@ class InspectionTest {
     void close() {
         Vehicle vehicle = Vehicle.builder().build();
         inspection.prepare(vehicle);
-        inspection.plan("3123L");
+        inspection.plan(SCHEDULE_CODE);
         inspection.register(component);
         inspection.close();
         Assertions.assertThrows(UnsupportedOperationException.class, ()->{
@@ -77,7 +78,7 @@ class InspectionTest {
     void testClose() {
         Vehicle vehicle = Vehicle.builder().build();
         inspection.prepare(vehicle);
-        inspection.plan("3123L");
+        inspection.plan(SCHEDULE_CODE);
         inspection.close(Cancellation.builder().build());
         Assertions.assertEquals(inspection.getCurrentState(), State.CLOSED);
     }

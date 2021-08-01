@@ -6,22 +6,24 @@ import ar.ungs.domain.models.shared.State;
 import ar.ungs.domain.models.shared.Vehicle;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 @Data
+@ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Inspection {
 
-    private String id;
+    private int id;
     private Vehicle vehicle;
     private List<Component> components;
     private Cancellation cancellation;
     private Date preparationDate;
     private Date planingDate;
-    private String scheduleCode;
+    private int scheduleCode;
     private Date closingDate;
     private State currentState;
 
@@ -43,7 +45,7 @@ public class Inspection {
         getState().prepare(this,vehicle);
     }
 
-    public void plan(String scheduleCode) {
+    public void plan(int scheduleCode) {
         getState().plan(this,scheduleCode);
     }
 

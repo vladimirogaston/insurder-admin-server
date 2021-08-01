@@ -8,22 +8,26 @@ import ar.ungs.domain.models.shared.Component;
 import ar.ungs.domain.models.shared.State;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Schedule {
 
     @JsonIgnore
     public static int MAX = 6;
-    private String id;
-    private Map<String, Inspection> inspections;
+    private int id;
+    private Map<Integer, Inspection> inspections;
     private Inspector inspector;
     private boolean notified;
+
+    @Autowired
+    private static SchedullerStrategy schedullerStrategy;
 
     public Schedule(Inspector inspector) {
         if(!inspector.isAvailable()) throw new DomainConstraintViolationException();
@@ -39,17 +43,17 @@ public class Schedule {
         getInspections().put(inspection.getId(), inspection);
     }
 
-    public void register(String id, Component component) {
+    public void register(int id, Component component) {
         Inspection inspection = findById(id);
         inspection.register(component);
     }
 
-    public void close(String id) {
+    public void close(int id) {
         Inspection inspection = findById(id);
         inspection.close();
     }
 
-    public void cancel(String id, Cancellation cancellation) {
+    public void cancel(int id, Cancellation cancellation) {
         Inspection inspection = findById(id);
         inspection.close(cancellation);
     }
@@ -70,9 +74,17 @@ public class Schedule {
         setNotified(true);
     }
 
-    public Inspection findById(String id) {
+    public Inspection findById(int id) {
         Inspection inspection = getInspections().get(id);
         if(inspection == null) throw new NotFoundException("");
         return inspection;
+    }
+
+    public static Set<Schedule> makeScheduleSet(Queue<Inspector> inspectors, Queue<Inspection> inspections) {
+        return schedullerStrategy.distributeWorkOverAvailableInspectors(inspectors, inspections);
+    }
+
+    public boolean hasInspections() {
+        return !this.inspections.isEmpty();
     }
 }
