@@ -1,15 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Application" type="Application" factoryName="Application" nameIsGenerated="true">
-    <option name="ALTERNATIVE_JRE_PATH" value="16" />
+    <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-16.0.1" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="ar.ungs.Application" />
-    <module name="insurance-carrier-server" />
-    <extension name="coverage">
-      <pattern>
-        <option name="PATTERN" value="ar.ungs.*" />
-        <option name="ENABLED" value="true" />
-      </pattern>
-    </extension>
+    <module name="betca-tpv-user" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

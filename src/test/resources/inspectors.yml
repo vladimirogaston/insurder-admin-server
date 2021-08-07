@@ -1,1 +1,5 @@
-#inspections
+#inspectors
+inspectors:
+  - available: true
+  - available: true
+  - available: true
