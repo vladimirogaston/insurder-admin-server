@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Date;
 
@@ -14,8 +15,10 @@ import java.util.Date;
 @Embeddable
 public class CancellationEntity {
 
+    @Column(nullable = false)
     private Date registration;
 
+    @Column(nullable = false)
     private String description;
 
     public CancellationEntity() {
