@@ -1,10 +1,11 @@
 #INSPECTORS
 inspectors:
-  - available: true
+  - &inspector01
+    available: true
   - available: true
   - available: true
 #INSPECTIONS
-inspections:
+inspections: &inspection01
   - components:
       - brand: "x2"
         code: "001"
@@ -21,4 +22,8 @@ inspections:
       ownerPhone: "46634657"
       location: "vdm"
     currentState: "PREPARED"
-
+#SCHEDULES
+schedules:
+  - inspections: *inspection01
+    inspector: *inspector01
+    notified: false

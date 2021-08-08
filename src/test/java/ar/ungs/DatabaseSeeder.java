@@ -2,9 +2,9 @@ package ar.ungs;
 
 import ar.ungs.infrastructure.data.daos.InspectionDao;
 import ar.ungs.infrastructure.data.daos.InspectorDao;
+import ar.ungs.infrastructure.data.daos.ScheduleDao;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
-import org.mapstruct.ValueMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,31 +21,47 @@ public class DatabaseSeeder {
     private DatabaseGraph graph;
     private InspectorDao inspectorDao;
     private InspectionDao inspectionDao;
+    private ScheduleDao scheduleDao;
 
     @Autowired
-    public DatabaseSeeder(InspectorDao inspectorDao, InspectionDao inspectionDao) {
+    public DatabaseSeeder(InspectorDao inspectorDao,
+                          InspectionDao inspectionDao,
+                          ScheduleDao scheduleDao) {
         this.inspectorDao = inspectorDao;
         this.inspectionDao = inspectionDao;
+        this.scheduleDao = scheduleDao;
     }
 
      public void seedDatabase() {
         loadDatabaseGraph();
         seedInspectors();
         seedInspections();
+        seedSchedules();
     }
 
     private void seedInspectors() {
         graph.getInspectors().forEach(entity -> {
             inspectorDao.save(entity);
-            LogManager.getLogger().log(Level.INFO, "DB::SEED > " + entity.toString());
+            log(entity.toString());
         });
     }
 
     private void seedInspections() {
         graph.getInspections().forEach(entity -> {
             inspectionDao.save(entity);
-            LogManager.getLogger().log(Level.INFO, "DB::SEED > " + entity.toString());
+            log(entity.toString());
         });
+    }
+
+    private void seedSchedules() {
+        graph.getSchedules().forEach(entity -> {
+            scheduleDao.save(entity);
+            log(entity.toString());
+        });
+    }
+
+    private void log(String entity) {
+        LogManager.getLogger().log(Level.INFO, "DB::SEED > " + entity);
     }
 
     private void loadDatabaseGraph() {
