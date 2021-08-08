@@ -4,9 +4,11 @@ import ar.ungs.domain.models.Schedule;
 import ar.ungs.domain.models.shared.Cancellation;
 import ar.ungs.domain.models.shared.Component;
 
+import java.util.Optional;
+
 public interface ScheduleService {
 
-    Schedule readNotNotifiedByInspector(int inspectorCode);
+    Optional<Schedule> readNotNotifiedByInspector(int inspectorCode);
 
     void cancel(int scheduleId, int inspectionId, Cancellation cancellation);
 

@@ -25,9 +25,6 @@ class ScheduleDaoTest {
         databaseSeeder.seedDatabase();
         Assertions.assertNotNull(scheduleDao);
         Assertions.assertFalse(scheduleDao.findAll().isEmpty());
-        scheduleDao.findAll().forEach(schedule->{
-            System.out.println(schedule.getInspector().getId());
-        });
-        //Assertions.assertFalse(scheduleDao.findByNotifiedIsFalseAndInspectorIdEquals(1).isPresent());
+        Assertions.assertTrue(scheduleDao.findByNotifiedIsFalseAndInspectorId(1).isPresent());
     }
 }

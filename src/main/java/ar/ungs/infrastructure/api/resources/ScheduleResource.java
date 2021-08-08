@@ -28,7 +28,7 @@ public class ScheduleResource {
 
     @GetMapping(value = ID)
     Schedule readOpenScheduleByInspectorCode(@PathVariable int inspectorCode) {
-        return scheduleService.readNotNotifiedByInspector(inspectorCode);
+        return scheduleService.readNotNotifiedByInspector(inspectorCode).get();
     }
 
     @PutMapping(value = ID + INSPECTIONS + ID)
