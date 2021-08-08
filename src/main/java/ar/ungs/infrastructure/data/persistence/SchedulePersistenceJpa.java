@@ -21,8 +21,9 @@ public class SchedulePersistenceJpa implements SchedulePersistence {
 
     @Override
     public Optional<Schedule> readNotNotifiedByInspector(int inspectorCode) {
-        Schedule schedule = null; //scheduleList.get(0);
-        return Optional.ofNullable(schedule);
+        return scheduleDao
+                .findByNotifiedIsFalseAndInspectorId(inspectorCode)
+                .map(ScheduleEntity::toModel);
     }
 
     @Override
@@ -33,6 +34,6 @@ public class SchedulePersistenceJpa implements SchedulePersistence {
 
     @Override
     public Optional<Schedule> findById(int scheduleId) {
-        return Optional.empty();
+        return scheduleDao.findById(scheduleId).map(ScheduleEntity::toModel);
     }
 }
