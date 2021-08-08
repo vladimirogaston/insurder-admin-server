@@ -30,7 +30,7 @@ public class InspectionEntity {
 
     private Date planingDate;
 
-    private String scheduleCode;
+    private Integer scheduleCode;
 
     private Date closingDate;
 
