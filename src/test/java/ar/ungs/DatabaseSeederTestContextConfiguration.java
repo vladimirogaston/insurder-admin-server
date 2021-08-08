@@ -1,5 +1,6 @@
 package ar.ungs;
 
+import ar.ungs.infrastructure.data.daos.InspectionDao;
 import ar.ungs.infrastructure.data.daos.InspectorDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -12,7 +13,7 @@ public class DatabaseSeederTestContextConfiguration {
     private InspectorDao inspectorDao;
 
     @Bean
-    public DatabaseSeeder databaseSeeder() {
-        return new DatabaseSeeder(inspectorDao);
+    public DatabaseSeeder databaseSeeder(@Autowired InspectionDao inspectionDao) {
+        return new DatabaseSeeder(inspectorDao, inspectionDao);
     }
 }

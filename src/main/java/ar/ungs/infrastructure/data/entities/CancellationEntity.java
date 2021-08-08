@@ -15,10 +15,7 @@ import java.util.Date;
 @Embeddable
 public class CancellationEntity {
 
-    @Column(nullable = false)
     private Date registration;
-
-    @Column(nullable = false)
     private String description;
 
     public CancellationEntity() {

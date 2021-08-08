@@ -1,5 +1,6 @@
 package ar.ungs;
 
+import ar.ungs.infrastructure.data.daos.InspectionDao;
 import ar.ungs.infrastructure.data.daos.InspectorDao;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -19,21 +20,30 @@ public class DatabaseSeeder {
     private String ymlFileName;
     private DatabaseGraph graph;
     private InspectorDao inspectorDao;
+    private InspectionDao inspectionDao;
 
     @Autowired
-    public DatabaseSeeder(InspectorDao inspectorDao) {
+    public DatabaseSeeder(InspectorDao inspectorDao, InspectionDao inspectionDao) {
         this.inspectorDao = inspectorDao;
+        this.inspectionDao = inspectionDao;
     }
 
      public void seedDatabase() {
-        LogManager.getLogger().log(Level.DEBUG, "SEEDDDD");
         loadDatabaseGraph();
         seedInspectors();
+        seedInspections();
     }
 
     private void seedInspectors() {
         graph.getInspectors().forEach(entity -> {
             inspectorDao.save(entity);
+            LogManager.getLogger().log(Level.INFO, "DB::SEED > " + entity.toString());
+        });
+    }
+
+    private void seedInspections() {
+        graph.getInspections().forEach(entity -> {
+            inspectionDao.save(entity);
             LogManager.getLogger().log(Level.INFO, "DB::SEED > " + entity.toString());
         });
     }

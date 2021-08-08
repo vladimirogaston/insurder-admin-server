@@ -4,7 +4,6 @@ import ar.ungs.domain.models.shared.AcceptanceLevel;
 import ar.ungs.domain.models.shared.Component;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
