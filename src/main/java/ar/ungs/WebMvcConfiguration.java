@@ -1,4 +1,4 @@
-package ar.ungs.configuration;
+package ar.ungs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

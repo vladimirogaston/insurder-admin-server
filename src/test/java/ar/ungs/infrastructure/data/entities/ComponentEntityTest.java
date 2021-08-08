@@ -5,7 +5,9 @@ import ar.ungs.domain.models.shared.Component;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("qa")
 class ComponentEntityTest {
 
     Component component;

@@ -4,11 +4,15 @@ import ar.ungs.infrastructure.data.entities.InspectionEntity;
 import ar.ungs.infrastructure.data.entities.InspectorEntity;
 import ar.ungs.infrastructure.data.entities.ScheduleEntity;
 import lombok.Data;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
 
 @Data
+@Profile("qa")
+@Component
 public class DatabaseGraph {
 
     private List<InspectorEntity> inspectors;
