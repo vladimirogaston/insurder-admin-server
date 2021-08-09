@@ -23,7 +23,7 @@ public class InspectionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ComponentEntity> components;
 
     private Date preparationDate;

@@ -7,6 +7,8 @@ import ar.ungs.infrastructure.data.entities.InspectionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class InspectionPersistenceJpa implements InspectionPersistence {
 
@@ -18,7 +20,9 @@ public class InspectionPersistenceJpa implements InspectionPersistence {
     }
 
     @Override
-    public void save(Inspection inspection) {
-        inspectionDao.save(new InspectionEntity(inspection));
+    public Optional<Inspection> save(Inspection inspection) {
+        InspectionEntity entity = new InspectionEntity(inspection);
+        Optional<InspectionEntity> target = Optional.ofNullable(inspectionDao.save(entity));
+        return target.isPresent() ? target.map(InspectionEntity::toModel) : Optional.empty();
     }
 }

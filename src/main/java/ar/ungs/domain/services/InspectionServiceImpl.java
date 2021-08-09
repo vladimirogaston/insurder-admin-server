@@ -7,6 +7,8 @@ import ar.ungs.domain.out_ports.InspectionPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class InspectionServiceImpl implements InspectionService {
 
@@ -18,9 +20,9 @@ public class InspectionServiceImpl implements InspectionService {
     }
 
     @Override
-    public void prepare(Inspection inspection) {
+    public Optional<Inspection> save(Inspection inspection) {
         if(inspection == null) throw new IllegalArgumentException("can't save inspection: is null.");
         if(inspection.getCurrentState() != State.PLANNED) throw new IllegalArgumentException("can't save not a prepared inspection");
-        this.inspectionPersistence.save(inspection);
+        return this.inspectionPersistence.save(inspection);
     }
 }

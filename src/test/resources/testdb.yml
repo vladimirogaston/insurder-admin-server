@@ -1,0 +1,29 @@
+#INSPECTORS
+inspectors:
+  - &inspector01
+    available: true
+  - available: true
+  - available: true
+#INSPECTIONS
+inspections: &inspection01
+  - components:
+      - brand: "x2"
+        code: "001"
+        acceptanceLevel: "BAD"
+      - brand: "x3"
+        code: "002"
+        acceptanceLevel: "BAD"
+    preparationDate: "2021-10-10"
+    scheduleCode: 12
+    vehicle:
+      patent: "tcc-681"
+      brand: "renault"
+      ownerDni: 33444888
+      ownerPhone: "46634657"
+      location: "vdm"
+    currentState: "PREPARED"
+#SCHEDULES
+schedules:
+  - inspections: *inspection01
+    inspector: *inspector01
+    notified: false

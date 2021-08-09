@@ -9,6 +9,8 @@ import ar.ungs.domain.out_ports.SchedulePersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ScheduleServiceImpl implements ScheduleService{
 
@@ -20,8 +22,9 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public Schedule readNotNotifiedByInspector(int inspectorCode) {
-        return schedulePersistence.readNotNotifiedByInspector(inspectorCode).orElseThrow(()->new NotFoundException(""));
+    public Optional<Schedule> readNotNotifiedByInspector(int inspectorCode) {
+        Schedule schedule = schedulePersistence.readNotNotifiedByInspector(inspectorCode).orElseThrow(()->new NotFoundException(""));
+        return Optional.ofNullable(schedule);
     }
 
     @Override

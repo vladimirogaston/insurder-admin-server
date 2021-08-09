@@ -1,12 +1,15 @@
 package ar.ungs.infrastructure.api.resources;
 
+import ar.ungs.domain.exceptions.NotFoundException;
 import ar.ungs.domain.in_ports.InspectionService;
 import ar.ungs.domain.models.inspection.Inspection;
+import ar.ungs.domain.models.shared.Vehicle;
 import ar.ungs.infrastructure.api.dtos.InspectionCreationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @RestController
 @RequestMapping(value = InspectionResource.INSPECTIONS)
@@ -22,8 +25,8 @@ public class InspectionResource {
     }
 
     @PostMapping
-    public void save(@RequestBody @Valid InspectionCreationDto inspectionDto) {
-        Inspection inspection = inspectionDto.toModel();
-        this.inspectionService.prepare(inspection);
+    public Inspection save(@RequestBody @Valid InspectionCreationDto inspectionDto) {
+        Inspection ret = this.inspectionService.save(inspectionDto.toModel()).orElseThrow(()->new NotFoundException(""));
+        return ret;
     }
 }
