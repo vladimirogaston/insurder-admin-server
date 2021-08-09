@@ -3,6 +3,8 @@ package ar.ungs.infrastructure.api.resources;
 import ar.ungs.domain.in_ports.ScheduleService;
 import ar.ungs.domain.models.Inspector;
 import ar.ungs.domain.models.Schedule;
+import ar.ungs.domain.models.inspection.Inspection;
+import ar.ungs.domain.models.shared.Vehicle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -34,6 +36,9 @@ class ScheduleResourceTest {
     void setUp() {
         target = new Schedule(Inspector.builder().id(10).available(true).build());
         target.setNotified(false);
+        Inspection inspection = new Inspection();
+        inspection.prepare(Vehicle.builder().build());
+        target.plan(inspection);
         Mockito.when(scheduleService.readNotNotifiedByInspector(10)).thenReturn(java.util.Optional.of(target));
         Mockito.when(scheduleService.readNotNotifiedByInspector(1)).thenReturn(java.util.Optional.empty());
     }
@@ -44,7 +49,6 @@ class ScheduleResourceTest {
                 .get(SCHEDULES_ID, 10)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8");
-
         mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.inspector.id").value(10))
