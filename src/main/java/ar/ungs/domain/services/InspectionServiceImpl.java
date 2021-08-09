@@ -20,7 +20,7 @@ public class InspectionServiceImpl implements InspectionService {
     }
 
     @Override
-    public Optional<Inspection> prepare(Inspection inspection) {
+    public Optional<Inspection> save(Inspection inspection) {
         if(inspection == null) throw new IllegalArgumentException("can't save inspection: is null.");
         if(inspection.getCurrentState() != State.PLANNED) throw new IllegalArgumentException("can't save not a prepared inspection");
         return this.inspectionPersistence.save(inspection);
