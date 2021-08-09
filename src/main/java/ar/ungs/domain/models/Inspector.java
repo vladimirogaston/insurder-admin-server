@@ -9,6 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class Inspector {
 
-    private int id;
+    private Integer id;
     private boolean available;
 }

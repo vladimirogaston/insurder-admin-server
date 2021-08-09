@@ -10,11 +10,9 @@ import org.springframework.context.annotation.Bean;
 @TestConfiguration
 public class DatabaseSeederTestContextConfiguration {
 
-    @Autowired
-    private InspectorDao inspectorDao;
-
     @Bean
-    public DatabaseSeeder databaseSeeder(@Autowired InspectionDao inspectionDao,
+    public DatabaseSeeder databaseSeeder(@Autowired InspectorDao inspectorDao,
+                                         @Autowired InspectionDao inspectionDao,
                                          @Autowired ScheduleDao scheduleDao) {
         return new DatabaseSeeder(inspectorDao, inspectionDao,scheduleDao);
     }

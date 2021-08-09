@@ -3,9 +3,9 @@ package ar.ungs.infrastructure.data.persistence;
 import ar.ungs.DatabaseGraph;
 import ar.ungs.DatabaseSeeder;
 import ar.ungs.DatabaseSeederTestContextConfiguration;
-import ar.ungs.domain.models.Schedule;
-import ar.ungs.domain.out_ports.SchedulePersistence;
-import ar.ungs.infrastructure.data.daos.ScheduleDao;
+import ar.ungs.domain.models.inspection.Inspection;
+import ar.ungs.domain.out_ports.InspectionPersistence;
+import ar.ungs.infrastructure.data.daos.InspectionDao;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,37 +20,34 @@ import java.util.Optional;
 @DataJpaTest
 @ActiveProfiles("qa")
 @Import({DatabaseSeederTestContextConfiguration.class})
-class SchedulePersistenceJpaTest {
+class InspectionPersistenceJpaIT {
 
     @Autowired
-    private SchedulePersistence schedulePersistence;
+    private InspectionPersistence inspectionPersistence;
 
     @Autowired
     private DatabaseSeeder databaseSeeder;
 
     @Test
-    void readNotNotifiedByInspector() {
-        databaseSeeder.seedDatabase();
-        Assertions.assertTrue(schedulePersistence.readNotNotifiedByInspector(1).isPresent());
-        Assertions.assertFalse(schedulePersistence.readNotNotifiedByInspector(11).isPresent());
+    void testConstructor() {
+        Assertions.assertNotNull(inspectionPersistence);
     }
 
     @Test
-    void save() {
+    void testSave() {
         DatabaseGraph graph = databaseSeeder.loadDatabaseGraph();
-        Schedule schedule = graph.getSchedules().get(0).toModel();
-        Optional<Schedule> saved = schedulePersistence.save(schedule);
+        Inspection inspection = graph.getInspections().get(0).toModel();
+        Assertions.assertNotNull(inspection);
+        Optional<Inspection> saved = inspectionPersistence.save(inspection);
         Assertions.assertTrue(saved.isPresent());
-        Assertions.assertNotNull(saved.get().getId());
-        Assertions.assertTrue(saved.get().hasInspections());
     }
 
     @TestConfiguration
-    public static class SchedulePersistenceTestContextConfig {
+    public static class InspectionPersistenceTestContextConfig {
 
         @Bean
-        public SchedulePersistence schedulePersistence(@Autowired ScheduleDao scheduleDao) {
-            return new SchedulePersistenceJpa(scheduleDao);
+        public InspectionPersistence inspectionPersistence(@Autowired InspectionDao inspectionDao) {
+            return new InspectionPersistenceJpa(inspectionDao);
         }
     }
 }

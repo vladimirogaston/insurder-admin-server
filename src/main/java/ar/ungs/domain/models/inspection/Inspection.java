@@ -17,7 +17,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Inspection {
 
-    private int id;
+    private Integer id;
     private Vehicle vehicle;
     private List<Component> components;
     private Cancellation cancellation;

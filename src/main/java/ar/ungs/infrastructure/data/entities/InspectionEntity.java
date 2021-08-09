@@ -21,7 +21,7 @@ public class InspectionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<ComponentEntity> components;

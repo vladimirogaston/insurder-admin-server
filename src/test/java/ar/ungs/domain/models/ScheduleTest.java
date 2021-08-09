@@ -62,7 +62,6 @@ class ScheduleTest {
         schedule.setId(ID);
         Assertions.assertNotNull(schedule.getInspector());
         Assertions.assertNotNull(schedule.getInspections());
-        Assertions.assertEquals(ID, schedule.getId());
     }
 
     @Test

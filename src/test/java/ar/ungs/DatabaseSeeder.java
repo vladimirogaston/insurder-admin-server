@@ -35,7 +35,7 @@ public class DatabaseSeeder {
     }
 
      public void seedDatabase() {
-        loadDatabaseGraph();
+        graph = loadDatabaseGraph();
         seedInspectors();
         seedInspections();
         seedSchedules();
@@ -66,7 +66,8 @@ public class DatabaseSeeder {
         LogManager.getLogger().log(Level.INFO, "DB::SEED > " + entity);
     }
 
-    private void loadDatabaseGraph() {
+    public DatabaseGraph loadDatabaseGraph() {
+        DatabaseGraph graph = new DatabaseGraph();
         try {
             LogManager.getLogger(this.getClass()).log(Level.INFO,
                     "Seed database operation status: [INITIALIZED - LOADING .YML]");
@@ -77,5 +78,6 @@ public class DatabaseSeeder {
             LogManager.getLogger(this.getClass()).log(Level.ERROR,
                     "Seed database operation status: [ABORT - ERROR LOADING .YML, " + e.getMessage() + "]");
         }
+        return  graph;
     }
 }

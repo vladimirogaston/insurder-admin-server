@@ -21,7 +21,7 @@ public class Schedule {
 
     @JsonIgnore
     public static int MAX = 6;
-    private int id;
+    private Integer id;
     private Map<Integer, Inspection> inspections;
     private Inspector inspector;
     private boolean notified;

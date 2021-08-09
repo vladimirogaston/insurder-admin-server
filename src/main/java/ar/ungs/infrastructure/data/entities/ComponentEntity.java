@@ -15,7 +15,7 @@ public class ComponentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String brand;
 
@@ -25,7 +25,6 @@ public class ComponentEntity {
     private AcceptanceLevel acceptanceLevel;
 
     public ComponentEntity() {
-        setId(-1);
         setBrand("");
         setCode("");
         setAcceptanceLevel(AcceptanceLevel.BAD);
