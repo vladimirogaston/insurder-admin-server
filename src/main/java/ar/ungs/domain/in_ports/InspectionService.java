@@ -2,7 +2,9 @@ package ar.ungs.domain.in_ports;
 
 import ar.ungs.domain.models.inspection.Inspection;
 
+import java.util.Optional;
+
 public interface InspectionService {
 
-    void prepare(Inspection inspection);
+    Optional<Inspection> prepare(Inspection inspection);
 }

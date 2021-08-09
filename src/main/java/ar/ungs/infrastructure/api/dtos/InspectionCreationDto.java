@@ -5,12 +5,14 @@ import ar.ungs.domain.models.shared.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.beans.BeanUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class InspectionCreationDto {
