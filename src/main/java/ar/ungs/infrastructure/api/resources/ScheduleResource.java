@@ -1,5 +1,6 @@
 package ar.ungs.infrastructure.api.resources;
 
+import ar.ungs.domain.exceptions.NotFoundException;
 import ar.ungs.domain.in_ports.ScheduleService;
 import ar.ungs.domain.models.Schedule;
 import ar.ungs.domain.models.shared.Cancellation;
@@ -27,8 +28,9 @@ public class ScheduleResource {
     }
 
     @GetMapping(value = ID)
-    Schedule readOpenScheduleByInspectorCode(@PathVariable int inspectorCode) {
-        return scheduleService.readNotNotifiedByInspector(inspectorCode).get();
+    public Schedule readOpenScheduleByInspectorCode(@PathVariable int id) {
+        return scheduleService.readNotNotifiedByInspector(id)
+                .orElseThrow(()-> new NotFoundException("schedule not found"));
     }
 
     @PutMapping(value = ID + INSPECTIONS + ID)

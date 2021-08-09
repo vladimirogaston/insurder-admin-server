@@ -1,46 +1,65 @@
 package ar.ungs.infrastructure.api.resources;
 
+import ar.ungs.domain.in_ports.ScheduleService;
+import ar.ungs.domain.models.Inspector;
+import ar.ungs.domain.models.Schedule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(controllers = {ScheduleResource.class})
 class ScheduleResourceTest {
 
-    @Test
-    void readOpenScheduleByInspectorCode() {
+    public static final String SCHEDULES_ID = "/schedules/{id}";
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockBean
+    ScheduleService scheduleService;
+
+    Schedule target;
+
+    @BeforeEach
+    void setUp() {
+        target = new Schedule(Inspector.builder().id(10).available(true).build());
+        target.setNotified(false);
+        Mockito.when(scheduleService.readNotNotifiedByInspector(10)).thenReturn(java.util.Optional.of(target));
+        Mockito.when(scheduleService.readNotNotifiedByInspector(1)).thenReturn(java.util.Optional.empty());
     }
 
     @Test
-    void registerComponent() {
+    void readOpenScheduleByInspectorCode() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders
+                .get(SCHEDULES_ID, 10)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8");
+
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.inspector.id").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.notified").value(false))
+                .andDo(print())
+                .andReturn();
     }
 
     @Test
-    void cancel() {
-    }
-
-    @Test
-    void close() {
-    }
-
-    @Test
-    void notifySchedule() {
-    }
-
-    @Test
-    void testReadOpenScheduleByInspectorCode() {
-    }
-
-    @Test
-    void testRegisterComponent() {
-    }
-
-    @Test
-    void testCancel() {
-    }
-
-    @Test
-    void testClose() {
-    }
-
-    @Test
-    void testNotifySchedule() {
+    void readWithNotExistentInspectorId() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders
+                .get(SCHEDULES_ID, 1)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8");
+        mockMvc.perform(request)
+                .andExpect(status().is(404)).andReturn();
     }
 }
