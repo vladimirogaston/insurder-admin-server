@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -22,11 +21,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Date;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = {InspectionResource.class})
-@AutoConfigureMockMvc
 class InspectionResourceTest {
 
     @MockBean
@@ -61,15 +59,13 @@ class InspectionResourceTest {
                 .contentType(MediaType.APPLICATION_JSON);
 
         Inspection target = INSPECTION_CREATION_DTO.toModel();
-        Mockito.when(inspectionService.save(target)).thenReturn(java.util.Optional.ofNullable(target));
+        Mockito.when(inspectionService.save(any())).thenReturn(java.util.Optional.ofNullable(target));
         Assertions.assertTrue(inspectionService.save(target).isPresent());
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers
-                        .jsonPath("$.currentState")
-                        .value("PREPARED"))
-                .andDo(print())
+                        .jsonPath("$.currentState").value("PLANNED"))
                 .andReturn();
     }
 }
