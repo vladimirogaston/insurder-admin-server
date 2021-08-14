@@ -5,6 +5,7 @@ import ar.ungs.domain.models.Inspector;
 import ar.ungs.domain.models.Schedule;
 import ar.ungs.domain.models.inspection.Inspection;
 import ar.ungs.domain.models.shared.Vehicle;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -17,7 +18,6 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = {ScheduleResource.class})
@@ -31,36 +31,39 @@ class ScheduleResourceTest {
     ScheduleService scheduleService;
 
     Schedule target;
+    final int EXISTENT_SCHEDULE_ID = 10;
+    final int NOT_EXISTENT_SCHEDULE_ID = 1;
 
     @BeforeEach
     void setUp() {
-        target = new Schedule(Inspector.builder().id(10).available(true).build());
-        target.setNotified(false);
         Inspection inspection = new Inspection();
         inspection.prepare(Vehicle.builder().build());
+        inspection.setId(300);
+        target = new Schedule(Inspector.builder().id(EXISTENT_SCHEDULE_ID).available(true).build());
+        target.setId(200);
         target.plan(inspection);
-        Mockito.when(scheduleService.readNotNotifiedByInspector(10)).thenReturn(java.util.Optional.of(target));
-        Mockito.when(scheduleService.readNotNotifiedByInspector(1)).thenReturn(java.util.Optional.empty());
+        Mockito.when(scheduleService.readNotNotifiedByInspector(EXISTENT_SCHEDULE_ID)).thenReturn(java.util.Optional.of(target));
+        Mockito.when(scheduleService.readNotNotifiedByInspector(NOT_EXISTENT_SCHEDULE_ID)).thenReturn(java.util.Optional.empty());
     }
 
     @Test
     void readOpenScheduleByInspectorCode() throws Exception {
+        Assertions.assertNotNull(target.getInspections());
         RequestBuilder request = MockMvcRequestBuilders
-                .get(SCHEDULES_ID, 10)
+                .get(SCHEDULES_ID, EXISTENT_SCHEDULE_ID)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8");
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.inspector.id").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.inspector.id").value(EXISTENT_SCHEDULE_ID))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.notified").value(false))
-                .andDo(print())
                 .andReturn();
     }
 
     @Test
     void readWithNotExistentInspectorId() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders
-                .get(SCHEDULES_ID, 1)
+                .get(SCHEDULES_ID, NOT_EXISTENT_SCHEDULE_ID)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8");
         mockMvc.perform(request)

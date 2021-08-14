@@ -23,7 +23,7 @@ public class Inspection {
     private Cancellation cancellation;
     private Date preparationDate;
     private Date planingDate;
-    private int scheduleCode;
+    private Integer scheduleCode;
     private Date closingDate;
     private State currentState;
 
@@ -45,7 +45,7 @@ public class Inspection {
         getState().prepare(this,vehicle);
     }
 
-    public void plan(int scheduleCode) {
+    public void plan(Integer scheduleCode) {
         getState().plan(this,scheduleCode);
     }
 

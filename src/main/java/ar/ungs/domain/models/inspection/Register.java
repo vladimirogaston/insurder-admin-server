@@ -16,7 +16,7 @@ public class Register extends AbstractInspectionState {
     }
 
     @Override
-    public void plan(Inspection inspection, int scheduleCode) {
+    public void plan(Inspection inspection, Integer scheduleCode) {
         throw new UnsupportedOperationException();
     }
 

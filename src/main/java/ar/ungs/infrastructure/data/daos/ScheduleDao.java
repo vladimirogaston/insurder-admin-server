@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ScheduleDao extends JpaRepository<ScheduleEntity, Integer> {
 
-    Optional<ScheduleEntity> findByNotifiedIsFalseAndInspectorId(int id);
+    Optional<ScheduleEntity> findByNotifiedIsFalseAndInspectorId(Integer id);
 }
